@@ -72,7 +72,7 @@ const mapStateToProps = state => {
     return {
         showing: state.general.showing,
         isHide: state.general.isHide,
-        initials: state.general.portada.initials,
+        // initials: state.general.portada.initials,
     }
 }
 

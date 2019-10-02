@@ -14,7 +14,7 @@ export const route = {
     component: Main,
     routes: [
         {
-            path: _base.path + "/catalogo",
+            path: _base.path + "/",
             component: ListProducts,
             name: 'Catalog',
             // rel: 'home',

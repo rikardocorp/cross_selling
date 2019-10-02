@@ -7,7 +7,7 @@ const appRoutes = [
 
     // routesPages,
     // routesVertical,
-    routesPrincipal,
+    // routesPrincipal,
     routesCatalog,
 ]
 

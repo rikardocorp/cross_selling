@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Main from "./Principal";
 
 
-export const _base = { name: 'Principal', path: '/web' }
+export const _base = { name: 'Principal', path: '/' }
 
 export const route = {
     path: _base.path,

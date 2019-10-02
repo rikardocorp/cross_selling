@@ -53,6 +53,8 @@ class Catalog extends Component {
                     return localRoute.views.map((prop, key) => {
                         return (
                             <Route path={prop.path}
+                                exact={true}
+
                                 key={key}
                                 render={routeProps =>
                                     <prop.component {...routeProps} />
@@ -68,6 +70,7 @@ class Catalog extends Component {
                 const localPath = localRoute.path + (localRoute.params ? localRoute.params : '')
                 return (
                     <Route
+                        exact={true}
                         path={localPath}
                         key={key}
                         isAuthenticated={this.props.isAuth}
@@ -95,7 +98,7 @@ const mapStateToProps = state => {
     return {
         notify: state.general.notify,
         // isAuth: state.general.user.auth,
-        // socials: state.general.about_me.socials
+        socials: []
     }
 }
 
