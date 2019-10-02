@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Audiowide|La+Belle+Aurore|Lobster');
+
+@mixin rgba-background($hexcolor, $opacity) {
+    background-color: $hexcolor;
+    background-color: rgba($hexcolor, $opacity); 
+}
+
+@import '../../config/data.scss';
+
+$font-etiqueta: 'La Belle Aurore', cursive;
+$color-etiqueta: #515152;
+
+$gradientColor1: rgb(15, 14, 14);
+$gradientColor2: rgba(0, 0, 0, 0.884);
+$gradientColor3: $colorPrincipalGradientDark;//rgba(0, 0, 0, 0.644);
+$gradientColor4: $colorPrincipalGradient; //rgba(34, 87, 87, 0.63);
+
+$gradient_image: linear-gradient(to right, $gradientColor1 0%,$gradientColor2 31%, $gradientColor3 61%, rgba(255, 255, 255, 0.20) 100%);
+// $gradient_image: linear-gradient(to right, $gradientColor1 0%,$gradientColor2 31%, $gradientColor3 61%, $gradientColor4 100%);
+$gradient: linear-gradient(to right, $gradientColor1 0%,$gradientColor2 31%, $gradientColor3 61%, $gradientColor4 100%);
+
+@font-face {
+    font-family: 'icomoon';
+    src: url('../fonts/icomoon.eot?tts1zr');
+    src: url('../fonts/icomoon.eot?tts1zr#iefix') format('embedded-opentype'), url('../fonts/icomoon.ttf?tts1zr') format('truetype'), url('../fonts/icomoon.woff?tts1zr') format('woff'), url('../fonts/icomoon.svg?tts1zr#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"],
+[class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-contact_mail:before {
+    content: "\e0d0";
+}
+
+.icon-home:before {
+    content: "\e88a";
+}
+
+.icon-gear:before {
+    content: "\f013";
+}
+
+.icon-mail:before {
+    content: "\f0e0";
+}
+
+.icon-prof:before {
+    content: "\f2c0";
+}
+
+.icon-cloud-download:before {
+    content: "\e9c2";
+}
+
+.icon-eye:before {
+    content: "\e9ce";
+}
+
+.icon-whatsapp:before {
+    content: "\ea93";
+}
+
+.icon-github:before {
+    content: "\eab0";
+}
+
+.icon-linkedin:before {
+    content: "\eac9";
+}

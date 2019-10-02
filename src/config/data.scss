@@ -1,0 +1,8 @@
+// $colorPrincipal:#2cbb97;
+$colorPrincipal:#08bea0;
+$colorPrincipalGradient: rgba(darken($colorPrincipal,20%), 0.5);
+$colorPrincipalGradientDark: rgba(darken($colorPrincipal,40%), 0.7);
+$colorblack: $colorPrincipal; // Color menu active color
+
+$imgPortada: '../img/portada.jpg';
+$imgAboutMe: '../img/portada1.jpg';
