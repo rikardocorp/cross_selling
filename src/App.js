@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Switch, Redirect, Route, withRouter } from 'react-router-dom'
+import { Switch, Redirect, Route } from 'react-router-dom'
 
 import appRoutes from './routes/index'
 import './assets/scss/cross_selling/project.scss'

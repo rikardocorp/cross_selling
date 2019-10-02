@@ -1,9 +1,6 @@
-import { BrowserRouter as Router, Route, Link, withRouter } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import React, { Component } from 'react';
-import {
-    Card, Button, CardImg, CardTitle, CardText, CardColumns,
-    CardSubtitle, CardBody
-} from 'reactstrap';
+import { Card, CardImg, CardTitle, CardColumns, CardBody} from 'reactstrap';
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
 import {PATH_IMAGE} from '../../shared/utility'

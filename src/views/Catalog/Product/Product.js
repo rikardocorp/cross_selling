@@ -10,8 +10,14 @@ class Product extends Component {
     state = {
         sku: null,
         query: null,
-        categories: ['cover', 'top', 'dress', 'midle', 'bottom'],
-        relations:{}
+        categories: [
+            { key: 'cover', text:'Covers'},
+            { key: 'top', text: 'Upper' },
+            { key: 'dress', text: 'Dresses' },
+            { key: 'midle', text: 'Legs' },
+            { key: 'bottom', text: 'Feet' }],
+        relations:{},
+        k_top: 4
     }
 
     componentDidMount(){
@@ -19,6 +25,13 @@ class Product extends Component {
         this.updateData(this.props.match.params.id)
     }
 
+    change_tops = (value) => {
+        if (value != this.state.k_top){
+            this.setState({
+                k_top: value
+            })
+        }
+    }
     
 
     updateData = async (sku) => {
@@ -91,9 +104,11 @@ class Product extends Component {
 
         let allListProducts = []
         this.state.categories.map( (cat, index) => {
-            if (relations[cat] != null) {
+            let key = cat['key']
+            let text = cat['text']
+            if (relations[key] != null) {
                 allListProducts.push(
-                    <ListItemProduct key={index} name={cat} list_items={relations[cat]} />
+                    <ListItemProduct k_top={this.state.k_top} key={index} key_name={key} name={text} list_items={relations[key]} />
                 )
             }
         })
@@ -105,14 +120,10 @@ class Product extends Component {
                 }
                 <div className='product-detail row'>
                     <div className='col-12 col-md-5 first-column d-flex align-items-center fixed-top'>
-                        <ItemSpecial item={query} categories={categories} relations={relations}></ItemSpecial>
+                        <ItemSpecial event_tops={this.change_tops} item={query} categories={categories} relations={relations}></ItemSpecial>
                     </div>
 
                     <div className='col-12 col-md-7 second-column offset-md-5'>
-                        {/* <ListItemProduct name='cover' list_items={product} />
-                        <ListItemProduct name='top' list_items={product} />
-                        <ListItemProduct name='dress' list_items={product} />
-                        <ListItemProduct name='midle' list_items={product} /> */}
                         {
                             allListProducts
                         }

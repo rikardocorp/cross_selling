@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import { Link } from 'react-scroll'
 import Image from './Image'
+import { resize_bounding_box } from '../../../shared/utility'
 
 class ItemSpecial extends Component {
 
@@ -30,7 +31,9 @@ class ItemSpecial extends Component {
     }
 
     getBox = (box, width, height) => {
-        let points = box.split('-').map(x => parseInt(x))
+        box = box.split('-')
+        // box = resize_bounding_box(box, true, 0.1, [height, width])
+        let points = box.map(x => parseInt(x))
         let left = points[0] * 100 / height
         let top = points[1] * 100 / width
         let w = (points[2] - points[0]) * 100 / height
@@ -67,14 +70,16 @@ class ItemSpecial extends Component {
         const filename = productId + '_' + sku + '_' + imageId + '.jpg'
         const categories = this.props.categories
         let list_tags = categories.map((cat, index) => {
-            let obj = this.props.relations[cat]
+            let key = cat['key']
+            let text = cat['text']
+            let obj = this.props.relations[key]
             let classname = 'tag' + (index + 1) 
             if (obj != null) {
                 classname = classname + ' activated'
             }
             return (
-                <Link key={index} activeClass="active" to={cat} smooth={true} spy={true} offset={0} duration={1000}>
-                    <span className={classname}>{cat}s</span>
+                <Link key={index} activeClass="active" to={key} smooth={true} spy={true} offset={0} duration={1000}>
+                    <span className={classname}>{text}</span>
                 </Link >
             )
         })
@@ -106,6 +111,11 @@ class ItemSpecial extends Component {
                     <h4 className='text-center mb-3'>SKU: {sku}</h4>
                     <a href={link} target='_BLANK'><span className='hvr-pulse'><i className='fa fa-link'></i></span></a>
                     <span className='hvr-pulse right-0' onClick={()=>this.changeState()}><i className={"fa fa-toggle-" + classOn} aria-hidden="true"></i></span>
+                    <div className='buttons-list'>
+                        <span className='hvr-pulse right-0' onClick={() => this.props.event_tops(4)}>X 4</span>
+                        <span className='hvr-pulse right-0' onClick={() => this.props.event_tops(8)}>X 8</span>
+                        <span className='hvr-pulse right-0' onClick={() => this.props.event_tops(20)}>X X</span>
+                    </div>
                 </div>
             </div>
         )

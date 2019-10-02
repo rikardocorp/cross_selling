@@ -201,3 +201,83 @@ export const iconMethod = [
     { label: 'Compass', icon: 'pe-7s-compass' },
     { label: 'calculator', icon: 'pe-7s-calculator' },
 ]
+
+export const resize_bounding_box = (box, isSquare = false, percent = 0.2, shape = []) => {
+    let [x1, y1, x2, y2] = box
+    let w = x2 - x1
+    let h = y2 - y1
+    if (!isSquare) {
+        return x1, y1, x2, y2
+    }
+
+    let diff = Math.abs(w - h)
+    let incremento = parseInt(diff / 2)
+    let percent_size = 0
+
+    if (w > h){
+        percent_size = parseInt(w * percent)
+        incremento += percent_size
+
+        x1 -= percent_size
+        w += percent_size * 2
+
+        y1 -= incremento
+        h += incremento * 2
+    } else {
+        percent_size = parseInt(h * percent)
+        incremento += percent_size
+
+        y1 -= percent_size * 2
+        h += percent_size * 2
+
+        x1 -= incremento
+        w += incremento * 2
+    }
+
+    let [height, width] = shape
+    height -= 1
+    width -= 1
+
+    let [px1, py1, px2, py2] = [x1, y1, w + x1, h + y1]
+
+    let diffX = 0
+    //  EJE X
+    if (px2 > width){
+        diffX = px2 - width
+        px1 = px1 - diffX
+        px2 = width
+        if (px1 < 0){
+            px1 = 0
+        }
+    }
+
+    if (px1 < 0) {
+        diffX = -1 * px1
+        px2 = px2 + diffX
+        px1 = 0
+        if (px2 > width) {
+            px2 = width
+        }
+    }
+    // EJE Y
+    if (py2 > height) {
+        diffX = py2 - height
+        py1 = py1 - diffX
+        py2 = height
+        if (py1 < 0){
+            py1 = 0
+        }
+
+    }
+
+    if (py1 < 0) {
+        diffX = -1 * py1
+        py2 = py2 + diffX
+        py1 = 0
+        if (py2 > height){
+            py2 = height
+        }
+    }
+
+    return [px1, py1, px2, py2]
+}
