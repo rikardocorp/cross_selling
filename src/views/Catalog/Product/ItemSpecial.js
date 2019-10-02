@@ -86,7 +86,7 @@ class ItemSpecial extends Component {
 
         return (
             <div className='special-product p-5'>
-                <div onClick={() => this.props.history.push('/catalogo')} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div>
+                <div onClick={() => this.props.history.push('/')} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div>
                 <h4 className='text-center mb-3 text-uppercase'>{title}</h4>
                 <div className='content-img'>
                     {
