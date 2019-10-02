@@ -61,7 +61,7 @@ class ItemProduct extends Component {
         const filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
 
         return (
-            <div className='col-lg-3 col-sm-4 mb-3'>
+            <div className='col-xl-3 col-sm-6 col-md-4 mb-3'>
                 <Card className='hvr-float-shadow product product-type-b'>
                     <CardImg top width="100%" src={filename} alt="Card image cap" />
                     <CardImgOverlay>

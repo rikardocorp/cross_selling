@@ -104,11 +104,11 @@ class Product extends Component {
                     conteLoading
                 }
                 <div className='product-detail row'>
-                    <div className='col-5 first-column d-flex align-items-center fixed-top'>
+                    <div className='col-12 col-md-5 first-column d-flex align-items-center fixed-top'>
                         <ItemSpecial item={query} categories={categories} relations={relations}></ItemSpecial>
                     </div>
 
-                    <div className='col-7 second-column offset-5'>
+                    <div className='col-12 col-md-7 second-column offset-md-5'>
                         {/* <ListItemProduct name='cover' list_items={product} />
                         <ListItemProduct name='top' list_items={product} />
                         <ListItemProduct name='dress' list_items={product} />

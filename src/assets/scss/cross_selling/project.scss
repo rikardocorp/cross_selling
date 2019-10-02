@@ -277,3 +277,34 @@ body{
         }
     }
 }
+
+
+
+@media(max-width:790px){
+    body {
+        .fixed-top {
+            position: relative;
+        }
+
+        .card-columns {
+            column-count: 2;
+        }
+
+        .card-img-overlay{
+            .card-text{
+                display: block !important;
+            }
+        }
+
+        .content-button-simple{
+            position: relative;
+            margin: 20px 0 30px;
+            > div {
+                margin: 0 auto;
+                width: 40%;
+                text-align: center;
+            }
+        }
+        
+    }
+}

@@ -97,9 +97,9 @@ class ListProducts extends Component {
                 {
                     conteLoading
                 }
-                <div className='col-8 m-auto'>
+                <div className='col-12 col-md-10 col-lg-8 m-auto'>
                     <div className='content-button-simple'>
-                        <div onClick={() => this.reloadData()}><i className='fa fa-bullseye hvr-pulse'></i></div>
+                        <div onClick={() => this.reloadData()}><i className='fa fa-bullseye hvr-pulse animated pulse infinite'></i></div>
                     </div>
                     <CardColumns>
                         {
