@@ -15,17 +15,17 @@ export const route = {
     name: _base.name,
     component: Main,
     routes: [
+        // {
+        //     path: _base.path + "/",
+        //     component: ListProducts,
+        //     name: 'Catalog',
+        //     // rel: 'home',
+        //     // icon: "icon-home",
+        //     // visible: true,
+        //     meta: { requiredNoAuth: true }
+        // },
         {
             path: _base.path + "/",
-            component: ListProducts,
-            name: 'Catalog',
-            // rel: 'home',
-            // icon: "icon-home",
-            // visible: true,
-            meta: { requiredNoAuth: true }
-        },
-        {
-            path: _base.path + "/demo",
             component: ListProductsDemo,
             name: 'Catalog',
             // rel: 'home',
