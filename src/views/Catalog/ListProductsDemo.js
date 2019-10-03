@@ -11,7 +11,7 @@ class ListProductsDemo extends Component {
 
     componentDidMount() {
         console.log('componentDidMount')
-        localStorage.setItem('catalogo', '/demo');
+        localStorage.setItem('catalogo', '/');
         if (this.props.database == null) {
             this.updateData()
         }
