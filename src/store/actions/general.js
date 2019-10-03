@@ -72,8 +72,8 @@ export const dispatchHTTP = (method, url, data = null, notify = { success: true,
                     resolve(result)
             }
             response.then(resp => {
-                console.log('[THEN RESPONSE]')
-                console.log(resp)
+                // console.log('[THEN RESPONSE]')
+                // console.log(resp)
                 // console.log('[------ ------ ------]')
 
                 // let statusMsg

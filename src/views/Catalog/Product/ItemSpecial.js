@@ -4,11 +4,13 @@ import { Link } from 'react-scroll'
 import Image from './Image'
 import { resize_bounding_box } from '../../../shared/utility'
 
+// const catalogoReturn = 
 class ItemSpecial extends Component {
 
     state = {
         isOn: false,
-        styleBox: {}
+        styleBox: {},
+        catalogoReturn: localStorage.getItem('catalogo')
     }
 
     updateBox = ()=>{
@@ -91,7 +93,7 @@ class ItemSpecial extends Component {
 
         return (
             <div className='special-product p-5'>
-                <div onClick={() => this.props.history.push('/')} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div>
+                <div onClick={() => this.props.history.push(this.state.catalogoReturn ? this.state.catalogoReturn : '/')} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div>
                 <h4 className='text-center mb-3 text-uppercase'>{title}</h4>
                 <div className='content-img'>
                     {

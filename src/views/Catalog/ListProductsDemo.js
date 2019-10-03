@@ -1,20 +1,20 @@
 import { withRouter } from "react-router-dom";
 import React, { Component } from 'react';
-import { Card, CardImg, CardTitle, CardColumns, CardBody} from 'reactstrap';
+import { Card, CardImg, CardTitle, CardColumns, CardBody } from 'reactstrap';
 import { connect } from 'react-redux'
 import * as actions from '../../store/actions/index'
-import {PATH_IMAGE} from '../../shared/utility'
+import { PATH_IMAGE } from '../../shared/utility'
 
 
-class ListProducts extends Component {
+class ListProductsDemo extends Component {
 
 
     componentDidMount() {
         console.log('componentDidMount')
-        if (this.props.database == null ){
+        localStorage.setItem('catalogo', '/demo');
+        if (this.props.database == null) {
             this.updateData()
         }
-        localStorage.setItem('catalogo', '/');
     }
 
     shuffle = (array, num) => {
@@ -39,11 +39,18 @@ class ListProducts extends Component {
         // let query = this.props.database.filter((item) => item.sku == sku)
         // query = query.length > 0 ? query[0] : {}
         console.log('UPDATE DATABASE')
-        let data = await this.props.onDispatch('GET', 'skus')
-        let database = data.status ? data.content : []
-        this.props.setDatabase(database)
+        let dataset = []
+        await this.props.skusdemo.map(async sku => {
+            let data = await this.props.onDispatch('GET', 'sku/'+sku)     
+            if (data.status) {
+                dataset.push(data.content)
+            }
+        })
+        // let data = await this.props.onDispatch('GET', 'sku/')
+        // let database = data.status ? data.content : []
+        this.props.setDatabase(dataset)
         // console.log(database.slice(0, 10) )
-        this.reloadData()
+        // this.reloadData()
     }
 
     goToDetail = (item) => {
@@ -56,14 +63,14 @@ class ListProducts extends Component {
         if (this.props.database && this.props.database.length > 0) {
             this.props.setSampleDatabase(this.shuffle(this.props.database, 50))
         }
-        
+
     }
 
     render() {
-        let products = this.props.datasample ? this.props.datasample : []
+        let products = this.props.database ? this.props.database : []
         // console.log(products)
         let list_products = []
-        products.map((item, key)=> {
+        products.map((item, key) => {
             let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null } = item
             let title = productName
             const filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
@@ -118,7 +125,9 @@ const mapStateToProps = state => {
         isLoading: state.general.isLoading,
         // isAuth: state.general.user.auth,
         database: state.general.database,
-        datasample: state.general.datasample
+        // datasample: state.general.datasample,
+        skusdemo: state.general.skusdemo
+
     }
 }
 
@@ -137,4 +146,4 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListProducts));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListProductsDemo));
