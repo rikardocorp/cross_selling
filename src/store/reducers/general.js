@@ -18,7 +18,8 @@ const initialState = {
     showing: false,
     isHide: false,
     database: null,
-    datasample: null
+    datasample: null,
+    skudemo: [1345541, 1355672]
 }
 
 const reducer = ( state = initialState, action ) => {

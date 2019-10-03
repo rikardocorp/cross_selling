@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const protocol = window.location.protocol
 const host = window.location.host
-export const BASE_URL = 'http://35.235.10.150:5000/'
+export const BASE_URL = 'http://34.95.223.116:5000/'
 
 const instance = axios.create({
     // baseURL: 'https://jsonplaceholder.typicode.com/'
