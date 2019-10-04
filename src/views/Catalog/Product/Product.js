@@ -17,7 +17,7 @@ class Product extends Component {
             { key: 'midle', text: 'Legs' },
             { key: 'bottom', text: 'Feet' }],
         relations:{},
-        k_top: 4
+        k_top: 10
     }
 
     componentDidMount(){
