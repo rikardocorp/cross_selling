@@ -12,10 +12,10 @@ class Product extends Component {
         query: null,
         categories: [
             { key: 'cover', text:'Covers'},
-            { key: 'top', text: 'Upper' },
+            { key: 'top', text: 'Tops' },
             { key: 'dress', text: 'Dresses' },
-            { key: 'midle', text: 'Legs' },
-            { key: 'bottom', text: 'Feet' }],
+            { key: 'midle', text: 'Midles' },
+            { key: 'bottom', text: 'Bottoms' }],
         relations:{},
         k_top: 10
     }

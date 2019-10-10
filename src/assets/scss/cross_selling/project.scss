@@ -2,11 +2,12 @@
 @import '../../../../node_modules/animate.css/animate.css';
 @import '../../../../node_modules/font-awesome/scss/font-awesome.scss';
 @import url('https://fonts.googleapis.com/css?family=Dancing+Script&display=swap');
-
+// @import url('https://fonts.googleapis.com/css?family=Nunito&display=swap');
 body{
     // background: black;
     height: 100vh;
     font-family: 'Dancing Script', cursive;
+    // font-family: 'Nunito', sans-serif;
 }
 
 #root{
@@ -100,8 +101,8 @@ body{
 .product-detail{
     // overflow: hidden;
     height: 100vh;
-    font-family: 'Dancing Script', cursive;
-
+    // font-family: 'Dancing Script', cursive;
+    // font-family: 'Nunito', sans-serif;
     .card-columns {
         column-count: 4;
     }
