@@ -67,7 +67,7 @@ class ItemSpecial extends Component {
             classOn = 'on'
         }
 
-        const { sku = null, productName = null, image = null, productId = null, imageId=null, link=null } = this.props.item ? this.props.item : {}
+        const { sku = null, productName = null, image = null, productId = null, imageId = null, link = null, imageUrl=null } = this.props.item ? this.props.item : {}
         const title = productName
         const filename = productId + '_' + sku + '_' + imageId + '.jpg'
         const categories = this.props.categories
@@ -88,7 +88,7 @@ class ItemSpecial extends Component {
 
         let imagePrincipal = null
         if (sku !== null){
-            imagePrincipal = <Image filename={filename}></Image>
+            imagePrincipal = <Image url={imageUrl} filename={filename}></Image>
         }
 
         return (

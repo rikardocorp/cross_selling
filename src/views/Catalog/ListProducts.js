@@ -39,7 +39,7 @@ class ListProducts extends Component {
         // let query = this.props.database.filter((item) => item.sku == sku)
         // query = query.length > 0 ? query[0] : {}
         console.log('UPDATE DATABASE')
-        let data = await this.props.onDispatch('GET', 'skus')
+        let data = await this.props.onDispatch('GET', 'skus2')
         let database = data.status ? data.content : []
         this.props.setDatabase(database)
         // console.log(database.slice(0, 10) )
@@ -64,12 +64,12 @@ class ListProducts extends Component {
         // console.log(products)
         let list_products = []
         products.map((item, key)=> {
-            let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null } = item
+            let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null } = item
             let title = productName
             const filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
             list_products.push(
                 <Card key={key} className='hvr-float-shadow product'>
-                    <CardImg onClick={() => this.goToDetail(item)} top width="100%" src={filename} alt="Card image cap" />
+                    <CardImg onClick={() => this.goToDetail(item)} top width="100%" src={imageUrl} alt="Card image cap" />
                     <CardBody>
                         <CardTitle>{title}</CardTitle>
                         {/* <CardSubtitle>Card subtitle</CardSubtitle> */}

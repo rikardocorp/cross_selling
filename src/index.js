@@ -10,6 +10,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import generalReducer from './store/reducers/general'
 
+import TagManager from 'react-gtm-module'
+
+const tagManagerArgs = {gtmId: 'GTM-THMSQHG'}
+
+TagManager.initialize(tagManagerArgs)
+
 
 const rootReducer = combineReducers({
     general: generalReducer

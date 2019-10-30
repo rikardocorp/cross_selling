@@ -2,7 +2,8 @@ import React from 'react';
 import axios from "./axios";
 import { confirmAlert } from 'react-confirm-alert'
 
-export const PATH_IMAGE = 'https://storage.googleapis.com/oechsle/img/images/'
+// export const PATH_IMAGE = 'https://storage.googleapis.com/oechsle/img/images/'
+export const PATH_IMAGE = 'https://storage.googleapis.com/oechsle/img2/'
 
 export const updateObject = (oldObject, updatedProperties) => {
     return {

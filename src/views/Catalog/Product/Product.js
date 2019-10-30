@@ -14,7 +14,7 @@ class Product extends Component {
             { key: 'cover', text:'Covers'},
             { key: 'top', text: 'Tops' },
             { key: 'dress', text: 'Dresses' },
-            { key: 'midle', text: 'Midles' },
+            { key: 'middle', text: 'Middles' },
             { key: 'bottom', text: 'Bottoms' }],
         relations:{},
         k_top: 10
@@ -38,26 +38,57 @@ class Product extends Component {
         // let query = this.props.database.filter((item) => item.sku == sku)
         // query = query.length > 0 ? query[0] : {}
 
-        let data = await this.props.onDispatch('GET','sku/' + sku)
+        let data = await this.props.onDispatch('GET','sku2/' + sku)
         let query = data.status ? data.content : {}
 
-        let relationsData = await this.props.onDispatch('GET', 'sku_json/' + sku)
+        let relationsData = await this.props.onDispatch('GET', 'sku_json_fast/' + sku)
 
         let relations = {
             cover: null,
             dress: null,
             top: null,
-            midle: null,
+            middle: null,
             bottom: null
         }
 
         if (relationsData.status){
-            relationsData.content[0].map(item => {
-                let category = item.categoria 
-                let items = item.items 
-                relations[category] = items
-                console.log(item.categoria)
-            })
+            console.log('RELATIONS:')
+            console.log(relationsData)
+            // console.log(relationsData.content[0])
+            // console.log(relationsData.content[1])
+            // console.log("'" + relationsData.content + "'")
+            // console.log(JSON.parse("'" + relationsData.content + "'"))
+            console.log(typeof relationsData.content)
+
+            let relationsContent = relationsData.content['data']
+            console.log(relationsContent)
+            if (relationsContent.length > 0){
+                relationsContent.map(_item => {
+                    let item = _item
+                    console.log('ITEM:')
+                    console.log(item)
+                    if (item) {
+                        let category = item.categoria
+                        let items = item.items
+                        relations[category] = items
+                        console.log(item.categoria)
+                    }
+
+                })
+            }
+            // if (typeof relationsData.content  == 'object') {
+            //     Object.values(relationsData.content).map(_item => {
+            //         let item = _item[0]
+            //         console.log(item)
+            //         if (item) {
+            //             let category = item.categoria
+            //             let items = item.items
+            //             relations[category] = items
+            //             console.log(item.categoria)
+            //         }
+
+            //     })
+            // }
         }
 
         this.setState({
@@ -107,6 +138,9 @@ class Product extends Component {
             let key = cat['key']
             let text = cat['text']
             if (relations[key] != null) {
+                console.log('RELATIONS:')
+                console.log(relations[key])
+
                 allListProducts.push(
                     <ListItemProduct k_top={this.state.k_top} key={index} key_name={key} name={text} list_items={relations[key]} />
                 )

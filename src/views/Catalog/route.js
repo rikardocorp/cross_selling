@@ -6,6 +6,8 @@ import ListProducts from './ListProducts'
 import ListProductsDemo from './ListProductsDemo'
 
 import Product from './Product/Product'
+import OE_Modal from './TestTM/oe_modal'
+
 
 
 export const _base = { name: 'Catalog', path: '' }
@@ -37,6 +39,12 @@ export const route = {
             path: _base.path + "/sku/:id",
             component: Product,
             name: 'Product',
+            meta: { requiredNoAuth: true }
+        },
+        {
+            path: _base.path + "/oe",
+            component: OE_Modal,
+            name: 'OE_Modal',
             meta: { requiredNoAuth: true }
         },
         { redirect: true, path: _base.path, to: _base.path + "/catalogo" }
