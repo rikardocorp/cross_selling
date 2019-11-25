@@ -41,7 +41,7 @@ class ListProductsDemo extends Component {
         console.log('UPDATE DATABASE')
         let dataset = []
         await this.props.skusdemo.map(async sku => {
-            let data = await this.props.onDispatch('GET', 'sku2/'+sku)     
+            let data = await this.props.onDispatch('GET', 'sku/'+sku)     
             if (data.status && data.content != null) {
                 dataset.push(data.content)
             }

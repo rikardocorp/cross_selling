@@ -38,10 +38,10 @@ class Product extends Component {
         // let query = this.props.database.filter((item) => item.sku == sku)
         // query = query.length > 0 ? query[0] : {}
 
-        let data = await this.props.onDispatch('GET','sku2/' + sku)
+        let data = await this.props.onDispatch('GET','sku/' + sku)
         let query = data.status ? data.content : {}
 
-        let relationsData = await this.props.onDispatch('GET', 'sku_json_fast/' + sku)
+        let relationsData = await this.props.onDispatch('GET', 'v31/sku_json_fast/' + sku)
 
         let relations = {
             cover: null,
