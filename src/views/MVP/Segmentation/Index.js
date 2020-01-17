@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 
-class Principal extends Component {
-
-    
+class Index extends Component {
     render() {
+        console.log('INTELLIGENCE')
         return (
             <div>
                 rikardocorp
@@ -12,5 +11,4 @@ class Principal extends Component {
     }
 }
 
-
-export default Principal
+export default Index

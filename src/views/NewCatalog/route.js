@@ -3,7 +3,7 @@ import Main from './Index'
 import ListProducts from './Products/ListProducts'
 import Product from './Product/Index'
 
-export const _base = { name: 'Main', path: '' }
+export const _base = { name: 'Catalogue', path: '/catalogo' }
 
 export const route = {
     path: _base.path,
@@ -21,14 +21,14 @@ export const route = {
         // },
         {
             path: _base.path + "/",
-            component: ListProducts, //() => <ListProductsDemo version={'ver1'}/>,
-            name: 'Catalog',
+            component: () => <ListProducts params={{ basepath: _base.path }} />, //() => <ListProductsDemo version={'ver1'}/>,
+            name: 'ListProducts',
             meta: { requiredNoAuth: true }
         },
 
         {
             path: _base.path + "/sku/:id",
-            component: Product, //() => <Product typeVersion='ver1' version='v11'/>,
+            component: () => <Product params={{basepath: _base.path}}/>,
             name: 'Product',
             meta: { requiredNoAuth: true }
         },

@@ -5,12 +5,20 @@ import RetrievalImage from './RetrievalImage'
 class ListRetrieval extends Component {
 
     goToDetail = (sku) => {
-        let path = '/sku/' + sku;
+        console.log('GoToDetail')
+        console.log(this.props)
+        let pathname = this.props.params.basepath
+        let path = pathname + '/sku/' + sku
+        // let pathname = this.props.location.pathname
+        // let path = pathname + '/sku/' + item.sku;
+        // let path = '/sku/' + sku;
         this.props.history.push(path);
     }
 
 
     render() {
+        console.log('ListRetrieval')
+        console.log(this.props)
         let { name = '', list_items = [], key_name = '', k_top = 4 } = this.props
         let list_products = []
         list_items.slice(0, k_top).map((item, key) => {

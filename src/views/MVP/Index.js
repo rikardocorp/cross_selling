@@ -75,11 +75,7 @@ class Index extends Component {
                         key={key}
                         isAuthenticated={this.props.isAuth}
                         requiredAuth={requiredAuth}
-                        // component={localRoute.component}
-                        render={routeProps =>
-                            <localRoute.component {...routeProps} />
-                        }
-                        />
+                        component={localRoute.component} />
                 );
             })
         }

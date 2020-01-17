@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withRouter } from "react-router-dom";
 import { connect } from 'react-redux'
 import { animateScroll as scroll } from 'react-scroll'
 import CmpTab from '../../../components/Tabs/CmpTab'
@@ -24,6 +25,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
+        console.log('this.props:', this.props)
         this.updateData(this.props.match.params.id)
     }
 
@@ -102,7 +104,8 @@ class Index extends Component {
     }
 
     goToDetail = (sku) => {
-        let path = '/sku/' + sku;
+        let pathname = this.props.params.basepath
+        let path = pathname + '/sku/' + sku;
         this.props.history.push(path);
     }
 
@@ -114,6 +117,7 @@ class Index extends Component {
     }
 
     render() {
+        console.log('Product: ',this.props)
         let product = this.props.database
         const query = this.state.query ? this.state.query : {}
         const categories = this.state.categories
@@ -134,9 +138,6 @@ class Index extends Component {
 
         let contentTabs = []
         relations.map( rel => {
-            // console.log('relations# AAA: ', x)
-            // let rel = x.data
-            // let key_name = x.id
             console.log('relations#: ', rel)
             let allListProducts = []
             this.state.categories.map((cat, index) => {
@@ -148,7 +149,7 @@ class Index extends Component {
                     let data = rel[key].data
                     let key_name = rel[key].id
                     allListProducts.push(
-                        <ListRetrieval k_top={this.state.k_top} key={index} key_name={key_name} name={text} list_items={data} />
+                        <ListRetrieval k_top={this.state.k_top} key={index} key_name={key_name} name={text} list_items={data} params={this.props.params}/>
                     )
                 }
             })
@@ -179,7 +180,11 @@ class Index extends Component {
                 }
                 <div className='product-detail row'>
                     <div className='col-12 col-md-5 first-column d-flex align-items-center fixed-top'>
-                        <ItemSpecial event_tops={this.change_tops} item={query} categories={categories} relations={aux_relations} version={this.state.version}></ItemSpecial>
+                        <ItemSpecial 
+                            event_tops={this.change_tops} 
+                            item={query} categories={categories}
+                            relations={aux_relations} version={this.state.version}
+                            params={this.props.params}/>
                     </div>
 
                     <div className='col-12 col-md-7 second-column offset-md-5'>
@@ -213,4 +218,4 @@ const mapDispatchToProps = dispatch => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Index);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Index));

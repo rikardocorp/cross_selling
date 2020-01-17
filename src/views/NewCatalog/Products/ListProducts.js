@@ -54,7 +54,10 @@ class ListProducts extends Component {
 
     goToDetail = (item) => {
         // let version = this.props.location.pathname
-        let path = '/sku/' + item.sku;
+        console.log('rikardocorp:', this.props)
+        let pathname = this.props.params.basepath
+        let path = pathname + '/sku/' + item.sku;
+        console.log(path)
         this.props.history.push(path);
     }
 
@@ -67,8 +70,8 @@ class ListProducts extends Component {
     }
 
     render() {
-        console.log('rikardocorp 1')
-        console.log(this.props)
+        console.log('rikardocorp:', this.props)
+
         let products = this.props.database ? this.props.database : []
         let list_products = []
         products.map((item, key) => {

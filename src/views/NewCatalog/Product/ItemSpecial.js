@@ -61,7 +61,8 @@ class ItemSpecial extends Component {
     }
 
     render() {
-        // console.log('INTERCORP RIKARDOCORP')
+        console.log('ItemSpecial:')
+        console.log(this.props)
         let classOn = 'off'
         if (this.state.isOn) {
             classOn = 'on'
@@ -98,7 +99,8 @@ class ItemSpecial extends Component {
 
         return (
             <div className='special-product p-5'>
-                <div onClick={() => this.props.history.push(this.state.catalogoReturn ? this.state.catalogoReturn : '/')} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div>
+                {/* <div onClick={() => this.props.history.goBack()} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div> */}
+                <div onClick={() => this.props.history.push(this.props.params.basepath)} className='button-simple hvr-backward'><i className='fa fa-angle-left'></i></div>
                 <h4 className='text-center mb-3 text-uppercase'>{title}</h4>
                 <div className='content-img'>
                     {
