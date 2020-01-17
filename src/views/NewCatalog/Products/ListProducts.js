@@ -2,13 +2,11 @@ import { withRouter } from "react-router-dom";
 import React, { Component } from 'react';
 import { Card, CardImg, CardTitle, CardColumns, CardBody } from 'reactstrap';
 import { connect } from 'react-redux'
-import * as actions from '../../store/actions/index'
-import { PATH_IMAGE } from '../../shared/utility'
-import { BASE_VERSION as base_version} from '../../shared/axios'
-
-class ListProductsDemo extends Component {
+import * as actions from '../../../store/actions/index'
+import { PATH_IMAGE } from '../../../shared/utility'
 
 
+class ListProducts extends Component {
     componentDidMount() {
         console.log('componentDidMount')
         localStorage.setItem('catalogo', '/');
@@ -42,7 +40,7 @@ class ListProductsDemo extends Component {
         let dataset = []
         // let version = this.props.location.pathname
         await this.props.skusdemo.map(async sku => {
-            let data = await this.props.onDispatch('GET', '/sku/'+sku)     
+            let data = await this.props.onDispatch('GET', '/sku/' + sku)
             if (data.status && data.content != null) {
                 dataset.push(data.content)
             }
@@ -56,7 +54,7 @@ class ListProductsDemo extends Component {
 
     goToDetail = (item) => {
         // let version = this.props.location.pathname
-        let path =  '/sku/' + item.sku;
+        let path = '/sku/' + item.sku;
         this.props.history.push(path);
     }
 
@@ -72,10 +70,9 @@ class ListProductsDemo extends Component {
         console.log('rikardocorp 1')
         console.log(this.props)
         let products = this.props.database ? this.props.database : []
-        // console.log(products)
         let list_products = []
         products.map((item, key) => {
-            let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null  } = item
+            let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null } = item
             let title = productName
             const filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
             list_products.push(
@@ -146,4 +143,4 @@ const mapDispatchToProps = dispatch => {
 
 
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListProductsDemo));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ListProducts));

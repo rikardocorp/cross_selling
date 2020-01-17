@@ -8,25 +8,25 @@ import { resize_bounding_box } from '../../../shared/utility'
 class ItemSpecial extends Component {
 
     state = {
-        isOn: false,
+        isOn: true,
         styleBox: {},
         catalogoReturn: localStorage.getItem('catalogo')
     }
 
-    updateBox = ()=>{
+    updateBox = () => {
         const { box = null, size_width = null, size_height = null } = this.props.item
         this.setState({
             styleBox: box ? this.getBox(box, size_width, size_height) : {},
-            isOn: false
+            isOn: true
         })
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.updateBox()
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        console.log('componentDidUpdate')
+        // console.log('componentDidUpdate')
         if (this.props.item.sku !== null && this.props.item.sku !== prevProps.item.sku) {
             this.updateBox()
         }
@@ -46,8 +46,8 @@ class ItemSpecial extends Component {
             height: h + '%',
             width: w + '%'
         };
-        console.log('BOXESS')
-        console.log(divStyle)
+        // console.log('BOXESS')
+        // console.log(divStyle)
         return divStyle
     }
 
@@ -61,35 +61,38 @@ class ItemSpecial extends Component {
     }
 
     render() {
-        console.log('INTERCORP RIKARDOCORP')
+        // console.log('INTERCORP RIKARDOCORP')
         let classOn = 'off'
         if (this.state.isOn) {
             classOn = 'on'
         }
 
-        const { sku = null, productName = null, image = null, productId = null, imageId = null, link = null, imageUrl=null } = this.props.item ? this.props.item : {}
+        const { sku = null, productName = null, image = null, productId = null, imageId = null, link = null, imageUrl = null } = this.props.item ? this.props.item : {}
         const title = productName
         const filename = productId + '_' + sku + '_' + imageId + '.jpg'
         const categories = this.props.categories
-        let list_tags = categories.map((cat, index) => {
-            let key = cat['key']
-            let text = cat['text']
-            let obj = this.props.relations[key]
-            let classname = 'tag' + (index + 1) 
-            if (obj != null) {
-                classname = classname + ' activated'
-            }
-            return (
-                <Link key={index} activeClass="active" to={key} smooth={true} spy={true} offset={0} duration={1000}>
-                    <span className={classname}>{text}</span>
-                </Link >
-            )
-        })
+        const version = this.props.version
+
+        let list_tags = null
+        if (this.props.relations != undefined) {
+            list_tags = categories.map((cat, index) => {
+                let key = cat['key']
+                let text = cat['text']
+                let obj = this.props.relations[key]
+                let classname = 'tag' + (index + 1)
+                if (obj != null) {
+                    classname = classname + ' activated'
+                }
+                return (
+                    <Link key={index} activeClass="active" to={version + '_' + key} smooth={true} spy={true} offset={-50} duration={1000}>
+                        <span className={classname}>{text}</span>
+                    </Link >
+                )
+            })
+        }
 
         let imagePrincipal = null
-        console.log(sku, imageUrl, filename)
-        console.log(this.props)
-        if (sku !== null){
+        if (sku !== null) {
             imagePrincipal = <Image url={imageUrl} filename={filename}></Image>
         }
 
@@ -114,7 +117,7 @@ class ItemSpecial extends Component {
                 <div className='content-footer mt-4'>
                     <h4 className='text-center mb-3'>SKU: {sku}</h4>
                     <a href={link} target='_BLANK'><span className='hvr-pulse'><i className='fa fa-link'></i></span></a>
-                    <span className='hvr-pulse right-0' onClick={()=>this.changeState()}><i className={"fa fa-toggle-" + classOn} aria-hidden="true"></i></span>
+                    <span className='hvr-pulse right-0' onClick={() => this.changeState()}><i className={"fa fa-toggle-" + classOn} aria-hidden="true"></i></span>
                     <div className='buttons-list'>
                         <span className='hvr-pulse right-0' onClick={() => this.props.event_tops(4)}>X 4</span>
                         <span className='hvr-pulse right-0' onClick={() => this.props.event_tops(8)}>X 8</span>

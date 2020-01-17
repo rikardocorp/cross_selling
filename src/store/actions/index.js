@@ -7,5 +7,6 @@ export {
     dispatchHTTP,
     fetchData,
     setDatabase,
-    setSampleDatabase
+    setSampleDatabase,
+    handlerLoading
 } from './general'

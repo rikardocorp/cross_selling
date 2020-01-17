@@ -2,9 +2,11 @@ import axios from 'axios';
 
 const protocol = window.location.protocol
 const host = window.location.host
+// export const BASE_URL = 'https://piloto-druid-spsa.appspot.com/'
 export const BASE_URL = 'https://piloto-druid-spsa.appspot.com/'
-// export const BASE_URL = 'https://piloto-druid-spsa.appspot.com/v31/'
-
+export const BASE_VERSION = 'v11'
+export const BASE_OECHSLE = 'https://www.oechsle.pe'
+// export const BASE_URL_FAST = 'https://piloto-druid-spsa.appspot.com/ver2/v11/'
 // export const BASE_URL = 'https://oe-api.appspot.com/'
 
 const instance = axios.create({
