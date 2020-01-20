@@ -130,12 +130,15 @@ body{
             border: 2px dashed rgba(255, 0, 0, 0.57);
             // display: none;
         }
-        img{
+        img {
             // cursor: pointer;
-            width: 100%;
-            border-radius: 100%;
+            // width: 100%;
+            // border-radius: 100%;
         }
         .content-img{
+            border-radius: 100%;
+            overflow: hidden;
+            background: #dbe0ea;
             // &:hover .boxing{
             //     display: block;
             // }

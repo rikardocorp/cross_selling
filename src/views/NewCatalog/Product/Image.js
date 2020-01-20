@@ -15,6 +15,6 @@ export default Image = (props) => {
         sourceImage = path + filename
     }
     return (
-        <img className='' src={sourceImage} />
+        <img className='' src={sourceImage} {...props} />
     )
 };

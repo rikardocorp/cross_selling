@@ -10,13 +10,44 @@ class ItemSpecial extends Component {
     state = {
         isOn: true,
         styleBox: {},
+        styleImage: {},
+        widthImage: '100%',
         catalogoReturn: localStorage.getItem('catalogo')
+    }
+
+    get_width = (width, height) => {
+        width = parseInt(width)
+        height = parseInt(height)
+        let _max, _min, percent, mleft, mtop = 0
+        if (width > height) {
+            _max = width
+            _min = height
+            percent = _min * 100 / _max
+            mtop = (100 - percent) / 2
+        } else {
+            _max = height
+            _min = width
+            percent = _min * 100 / _max
+            mleft = (100 - percent) / 2
+        }
+
+        return [percent, mleft, mtop]
     }
 
     updateBox = () => {
         const { box = null, size_width = null, size_height = null } = this.props.item
+        
+        let divStyle, imageStyle, widthImage = null
+        if (box){
+            [divStyle, imageStyle, widthImage] = this.getBox(box, size_width, size_height)
+        } else {
+            [divStyle, imageStyle, widthImage] = [{},{}, '100%']
+        }
+
         this.setState({
-            styleBox: box ? this.getBox(box, size_width, size_height) : {},
+            styleBox: divStyle,
+            styleImage: imageStyle,
+            widthImage: widthImage,
             isOn: true
         })
     }
@@ -33,22 +64,29 @@ class ItemSpecial extends Component {
     }
 
     getBox = (box, width, height) => {
+        let [percent, marginLeft, marginTop] = this.get_width(width, height)
         box = box.split('-')
-        // box = resize_bounding_box(box, true, 0.1, [height, width])
         let points = box.map(x => parseInt(x))
-        let left = points[0] * 100 / height
-        let top = points[1] * 100 / width
-        let w = (points[2] - points[0]) * 100 / height
-        let h = (points[3] - points[1]) * 100 / width
-        var divStyle = {
+        let left = (percent / 100) * points[0] * 100 / height + (marginLeft)
+        let top = (percent / 100) * points[1] * 100 / width + (marginTop)
+
+        let _max = Math.max(width, height)
+        let w = (percent / 100) * (points[2] - points[0]) * 100 / _max
+        let h = (percent / 100) * (points[3] - points[1]) * 100 / _max
+
+        let divStyle = {
             top: top + '%',
             left: left + '%',
             height: h + '%',
             width: w + '%'
         };
-        // console.log('BOXESS')
-        // console.log(divStyle)
-        return divStyle
+
+        let imageStyle = {
+            marginLeft: marginLeft + '%',
+            marginTop: marginTop + '%'
+        };
+
+        return [divStyle, imageStyle, percent + '%']
     }
 
 
@@ -94,7 +132,7 @@ class ItemSpecial extends Component {
 
         let imagePrincipal = null
         if (sku !== null) {
-            imagePrincipal = <Image url={imageUrl} filename={filename}></Image>
+            imagePrincipal = <Image url={imageUrl} width={this.state.widthImage} style={this.state.styleImage}></Image>
         }
 
         return (
