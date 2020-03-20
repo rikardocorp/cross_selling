@@ -98,7 +98,19 @@ body{
     }
 }
 
-.product-detail{
+.product-retrieval{
+    height: auto !important;
+
+    .product-type-b {
+        .do-btn-view{
+            display: none;
+        }
+    }
+}
+
+
+
+.product-detail, .product-retrieval{
     // overflow: hidden;
     height: 100vh;
     // font-family: 'Dancing Script', cursive;
@@ -232,7 +244,7 @@ body{
         }
     }
 
-    .second-column{
+    .second-column, .recommender{
         background: white;
 
         .item-card-columns{
@@ -456,7 +468,7 @@ body{
     position: relative;
     width: 100%;
     overflow: hidden;
-    background: #d4d4d4;
+    background: #e9e9e9;
 }
 .square-box:before{
     content: "";
@@ -489,10 +501,181 @@ body {
         }
     }
 
+    $color-cover: rgba(255, 144, 0, 0.6);
+    $color-top: rgba(2, 174, 56, 0.52);
+    $color-middle: rgba(0, 81, 204, 0.63);
+    $color-dress: rgba(206, 0, 208, 0.57);
+    $color-bottom: rgba(204, 190, 0, 0.596);
+
+    .moda {
+        .btn-maximize {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 1.5em;
+            color: white;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.66);
+            border-radius: 10% 30% 10% 10%;
+            color: white;
+            line-height: 0;
+        }
+        .label-default{
+            height: 170px;
+            background: #f7f7f7;
+            width: 60%;
+            margin: 0 auto;
+            border-radius: 1em;
+            text-align: center;
+            border: 2px dashed #e8e8e8;
+            padding: 20px;
+
+            span{
+                width: 100%;
+                color: #b1b1b1;
+                font-family: monospace;
+                font-size: 1em;
+            }
+        }
+        .badge {
+            font-size: 0.7em;
+            font-weight: 100;
+            padding: 4px 15px;
+            background-color: #d5d5d5;
+        }
+
+        .labeling{
+            opacity: 0.7;
+            color: rgb(83, 83, 83);
+            &.active{
+                opacity: 1;
+            }
+        }
+
+        .active {
+            &.cover {
+                .badge {
+                    background: $color-cover;
+                }
+                .progress .progress-bar{
+                    background-color: $color-cover !important;
+                }
+            }
+
+            &.top {
+                .badge {
+                    background: $color-top;
+                }
+                .progress .progress-bar{
+                    background-color: $color-top !important;
+                }
+            }
+
+            &.dress {
+                .badge {
+                    background: $color-dress;
+                }
+                .progress .progress-bar{
+                    background-color: $color-dress !important;
+                }
+            }
+
+            &.middle {
+                .badge {
+                    background: $color-middle;
+                }
+                .progress .progress-bar{
+                    background-color: $color-middle !important;
+                }
+            }
+
+            &.bottom {
+                .badge {
+                    background: $color-bottom;
+                }
+                .progress .progress-bar{
+                    background-color: $color-bottom !important;
+                }
+            }
+        }
+    }
+
     .process_1{
 
         .content {
-            padding: 10%;
+            // margin: 10%;
+            // border-radius: 100%;
+            // overflow: hidden;
+            // background: #3a3a3a;
+            margin: 0 10% 0 10%;
+            border-radius: 1em;
+            overflow: hidden;
+            // background: #3a3a3a;
+            background: #3a3a3a;
+            box-shadow: 8px 8px 14px rgba(0, 0, 0, 0.38);
+            border: 1px solid #d7d7d7;
+        }
+
+        .boxing{
+            font-size: 1em;
+            z-index: 0;
+            position: absolute;
+            border-radius: 0.3em;
+            cursor: pointer;
+
+            &.cover{
+                border: 2px dashed $color-cover;
+                span {
+                    background: $color-cover;
+                }
+            }
+            &.top{
+                border: 2px dashed $color-top;
+                span {
+                    background: $color-top;
+                }
+            }
+            &.middle{
+                border: 2px dashed $color-middle;
+                span {
+                    background: $color-middle;
+                }
+            }
+            &.dress{
+                border: 2px dashed $color-dress;
+                span {
+                    background: $color-dress;
+                }
+            }
+            &.bottom{
+                border: 2px dashed $color-bottom;
+                span {
+                    background: $color-bottom;
+                }
+            }
+            span {
+                font-size: 1.1em;
+                display: none;
+                position: absolute;
+                top: -28px;
+                padding: 0px 12px;
+                border-radius: 4%;
+                color: white;
+
+                &.score{
+                    font-size: 0.8em;
+                    display: block;
+                    right: 0;
+                    top: 25%;
+                    // bottom: 75%;
+                }
+            }
+            &:hover span{
+                display: block;
+            }
+            // &:hover span.score{
+            //     display: none;
+            // }
         }
         .process_form {
 
@@ -500,10 +683,8 @@ body {
         
         .process_result {
             img, .square-box {
-                width: 100%;
-                border-radius: 100%;
-                max-height: 32vw;
-                max-width: 32vw;
+                // width: 100%;
+                // border-radius: 100%;
             }
         }
 
@@ -546,5 +727,16 @@ body {
             max-height: 460px;
             max-width: 460px;
         }
+    }
+}
+
+.input-range{
+    .input-range__slider{
+        background: #4194ff;
+        border: 1px solid #4da3ff;
+    }
+
+    .input-range__track--active {
+        background: #4194ff;
     }
 }

@@ -43,7 +43,12 @@ class RetrievalImage extends Component {
     }
 
     updateData = (box, width, height) => {
+        if (typeof box == 'string') {
+            box = box.split('-')
+        }
+
         let [percent, marginLeft, marginTop] = this.get_width(width, height)
+        console.log(box)
         console.log([percent, marginLeft, marginTop])
         // box = box
         box = resize_bounding_box(box, true, 0.0, [height, width])
@@ -111,15 +116,17 @@ class RetrievalImage extends Component {
             productName = null, title = null, sku = null, 
             productId = null, imageId = null, linkText = null, 
             new_category = null, imageUrl = null, size_height = '1000', 
-            size_width='1000' } = this.props.item ? this.props.item : {}
+            size_width = '1000' } = this.props.item ? this.props.item : {}
 
+        
+        let { size_cols = 'col-xl-3 col-sm-6 col-md-4 mb-3'} = this.props 
 
         title = sku
         linkText = BASE_OECHSLE + linkText 
         console.log('TEST IMAGE: ',this.props.item )
-        let [percent, marginLeft, marginTop] = this.get_width(size_width, size_height)
+        // let [percent, marginLeft, marginTop] = this.get_width(size_width, size_height)
         return (
-            <div className='col-xl-3 col-sm-6 col-md-4 mb-3'>
+            <div className={size_cols}>
                 <Card className='hvr-float-shadow product product-type-b'>
                     {/* <CardImg top width="40%" src={filename} alt="Card image cap" /> */}
                     <Image className='' src={imageUrl} width={this.state.widthImage} style={this.state.styleImage}/>
@@ -127,8 +134,8 @@ class RetrievalImage extends Component {
                         <CardTitle>{title}</CardTitle>
                         <CardText>
                             {/* <span className='hvr-pulse'><i className='fa fa-link'></i></span> */}
-                            <a href={linkText} target='_BLANK'><span className='hvr-pulse'><i className='fa fa-link'></i></span></a>
-                            <span className='hvr-pulse right-0' onClick={() => this.props.redirect(sku)}><i className="fa fa-eye" aria-hidden="true"></i></span>
+                            <a className='do-btn-link' href={linkText} target='_BLANK'><span className='hvr-pulse'><i className='fa fa-link'></i></span></a>
+                            <span className='hvr-pulse right-0 do-btn-view' onClick={() => this.props.redirect(sku)}><i className="fa fa-eye" aria-hidden="true"></i></span>
                         </CardText>
                         <div className='boxing' style={this.state.styleBox}></div>
                         <div onClick={this.toggle} className='modal-event'></div>

@@ -19,7 +19,7 @@ class Index extends Component {
             { key: 'middle', text: 'Middles' },
             { key: 'bottom', text: 'Bottoms' }],
         relations: [],
-        services: ['ver1', 'ver2'],
+        services: ['ver1/v11/sku_json_fast', 'ver2/v11/sku_json_fast'],
         k_top: 4,
         version: 'ver1'
     }
@@ -49,13 +49,13 @@ class Index extends Component {
 
     updateData = async (sku) => {
 
-        let data = await this.props.onDispatch('GET', 'ver1/sku/' + sku)
+        let data = await this.props.onDispatch('GET', 'sku/' + sku)
         let query = data.status ? data.content : {}
 
         let results = []
         for (let i=0; i < this.state.services.length; i++) {
             let serv = this.state.services[i] 
-            let relationsData = await this.props.onDispatch('GET', serv + '/v11/sku_json_fast/' + sku)
+            let relationsData = await this.props.onDispatch('GET', serv + '/' + sku)
             let relations = {
                 cover: null,
                 dress: null,

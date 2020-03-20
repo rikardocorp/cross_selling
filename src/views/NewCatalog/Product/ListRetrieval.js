@@ -19,11 +19,11 @@ class ListRetrieval extends Component {
     render() {
         console.log('ListRetrieval')
         console.log(this.props)
-        let { name = '', list_items = [], key_name = '', k_top = 4 } = this.props
+        let { name = '', list_items = [], key_name = '', k_top = 4, size_cols = 'col-xl-3 col-sm-6 col-md-4 mb-3' } = this.props
         let list_products = []
         list_items.slice(0, k_top).map((item, key) => {
             list_products.push(
-                <RetrievalImage key={key} item={item} redirect={this.goToDetail}></RetrievalImage>
+                <RetrievalImage key={key} item={item} redirect={this.goToDetail} size_cols={size_cols}></RetrievalImage>
             )
         })
 

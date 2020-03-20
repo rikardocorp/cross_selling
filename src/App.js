@@ -6,6 +6,12 @@ import './assets/scss/cross_selling/project.scss'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import '../node_modules/hover.css/css/hover-min.css'
 
+import 'react-form-total/dist/assets/css/react-form-total.css'
+import 'react-form-total/dist/assets/css/checkbox_radio.css'
+import 'react-form-total/dist/assets/css/bootstrap_switch.css'
+// import 'react-datetime/css/react-datetime.css'
+import 'react-input-range/lib/css/index.css'
+
 class App extends Component {
 
   componentDidMount() {

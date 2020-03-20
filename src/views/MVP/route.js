@@ -11,7 +11,7 @@ export const route = {
     routes: [
         {
             path: _base.path + "/",
-            component: Segmentation, //() => <ListProductsDemo version={'ver1'}/>,
+            component: () => <Segmentation params={{ basepath: _base.path }} /> , //() => <ListProductsDemo version={'ver1'}/>,
             name: 'Segmentation',
             meta: { requiredNoAuth: true }
         },
