@@ -32,7 +32,7 @@ export const pushNotification = (config) => {
 }
 
 export const setDatabase = (value) => {
-    return { type: at.SET_DATABASE, value }
+    return { type: at.SET_DATABASE, value:value }
 }
 export const setSampleDatabase = (value) => {
     return { type: at.SET_SAMPLE_DATABASE, value }

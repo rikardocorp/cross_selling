@@ -17,7 +17,8 @@ const initialState = {
     },
     showing: false,
     isHide: false,
-    database: null,
+    database1: null,
+    database2: null,
     datasample: null,
     // skusdemo: [1215651, 1397826, 1384134, 1402241]
     skusdemo: [ 1215651, 1397826, 1384134, 1402241, 1475572, 1348723, 1475559, 1393526, 1348723, 1283341, 1390071, 1283418, 1474373,
@@ -59,10 +60,18 @@ const reducer = ( state = initialState, action ) => {
             }
 
         case at.SET_DATABASE:
-            return {
-                ...state,
-                database: action.value
+            if (action.value.type == 'ORIGINAL') {
+                return {
+                    ...state,
+                    database1: action.value.data
+                }
+            } else {
+                return {
+                    ...state,
+                    database2: action.value.data
+                }
             }
+            
         case at.SET_SAMPLE_DATABASE:
             return {
                 ...state,

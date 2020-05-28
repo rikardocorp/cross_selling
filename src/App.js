@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 
 import appRoutes from './routes/index'
+
+import './assets/scss/body.scss'
 import './assets/scss/cross_selling/project.scss'
 import '../node_modules/font-awesome/css/font-awesome.min.css'
 import '../node_modules/hover.css/css/hover-min.css'

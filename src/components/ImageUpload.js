@@ -79,38 +79,6 @@ class ImageUpload extends Component {
         return (
             <div style={{fontFamily: 'monospace'}}>
 
-                {/* <Form className='d-flex justify-content-center' inline onSubmit={this._handleSubmit}>
-                    <Row form>
-                        <Col md={8}>
-                            <FormGroup>
-                                <InputGroup>
-                                    <InputGroupAddon addonType="prepend">
-                                        <Button onClick={() => this.change_type(this.state.isFile)}
-                                            type='button' className='p-0 px-2'
-                                            style={{ fontSize: '0.8em', background: this.state.isFile ? '#007bff' : 'rgb(225, 225, 225)' }}>
-                                            <i className='fa fa-camera'></i>
-                                        </Button>
-                                    </InputGroupAddon>
-                                    {
-                                        this.state.isFile ? (
-                                            <CustomInput id='file' type="file" onChange={this._handleImageChange} label="Yo, pick a file!" />
-                                        ) : (
-                                                <Input onChange={this._handleInputChange} placeholder="Ingresa la url de una imagen..." />
-                                            )
-                                    }
-                                </InputGroup>
-                            </FormGroup>
-                        </Col>
-                        <Col md={4}>
-                            <FormGroup>
-                                <Button color='primary' className='ml-3' type="submit" onClick={this._handleSubmit}>Upload Image</Button>
-                            </FormGroup>
-                        </Col>
-                    </Row>
-                </Form> */}
-
-
-
                 <Form className='d-flex justify-content-center' inline onSubmit={this._handleSubmit}>
                     <FormGroup style={{ width: '40%'}}>
                         <InputGroup style={{ width: '100%' }}>

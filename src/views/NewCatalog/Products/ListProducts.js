@@ -47,7 +47,8 @@ class ListProducts extends Component {
         })
         // let data = await this.props.onDispatch('GET', 'sku/')
         // let database = data.status ? data.content : []
-        this.props.setDatabase(dataset)
+        this.props.setDatabase({ data: dataset, type: 'ORIGINAL' })
+
         // console.log(database.slice(0, 10) )
         // this.reloadData()
     }
@@ -109,11 +110,24 @@ class ListProducts extends Component {
                 }
                 <div className='col-12 col-md-10 col-lg-8 m-auto'>
                     <div className='content-button-simple'>
-                        <div className='text-center' onClick={() => this.reloadData()}><i className='fa fa-bullseye hvr-pulse animated pulse infinite'></i></div>
+                        <div className='text-center mt-2' 
+                            onClick={() => this.reloadData()}>
+                                <i 
+                                    className='fa fa-bullseye hvr-pulse'
+                                    style={{ padding: '8px', fontSize: '1em' }}
+                                ></i>
+                        </div>
+                        <div className='text-center mt-2'>
+                            <i title='MVP'
+                                onClick={()=>this.props.history.push('mvp_moda/')}
+                                style={{ background: 'rgb(31, 31, 31)', padding: '8px', fontSize: '1em' }}
+                                className='fa fa-tags'
+                            ></i>
+                        </div>
                         <div className='text-center mt-2' onClick={() => this.reloadData()}>
                             <i title='Experimental'
-                                onClick={()=>this.props.history.push('mvp/')}
-                                style={{ background: 'rgb(0, 123, 255)', padding: '8px', fontSize: '1em' }}
+                                onClick={() => this.props.history.push('mvp/')}
+                                style={{ background: 'rgb(99, 99, 99)', padding: '8px', fontSize: '1em' }}
                                 className='fa fa-rocket'
                             ></i>
                         </div>
@@ -136,7 +150,7 @@ const mapStateToProps = state => {
         notify: state.general.notify,
         isLoading: state.general.isLoading,
         // isAuth: state.general.user.auth,
-        database: state.general.database,
+        database: state.general.database1,
         // datasample: state.general.datasample,
         skusdemo: state.general.skusdemo
 

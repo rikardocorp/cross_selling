@@ -425,6 +425,121 @@ body{
 //     height: 500px !important;
 // }
 
+.footer-pagination {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 20px 20px 8px 20px;
+    background: rgba(255, 255, 255, 0.81);
+    width: 100%;
+
+    > nav {
+        width: 65%;
+        overflow: hidden;
+        margin: 0 auto;
+        .page-item.active{
+            .page-link{
+                background-color: #555555;
+                border-color: #393939;
+                color: white ;
+            }
+        }
+        .page-link{
+            color: #393939 ;
+            &:focus{
+                box-shadow: 0 0 0 0.2rem rgba(114, 114, 114, 0.25);
+            }
+        }
+    }
+}
+
+@media(max-width:790px){
+    .footer-pagination {
+        > nav {
+            width: 100%;
+        }
+    }
+
+}
+
+
+.product{
+    &:hover .options{
+        display: block !important; 
+    }
+    .card-body{
+        position: relative;
+        .options{
+            display: none;
+            position: absolute;
+            top: -25%;
+            width: 100%;
+            left: 0;
+            padding: 0 15px;
+            span{
+                cursor: pointer;
+                background: red;
+                width: 35px;
+                height: 35px;
+                text-align: center;
+                border-radius: 5em;
+                border: 1px solid white;
+                color: white;
+                padding: 5px;
+                left: 12px;
+                position: absolute;
+                &.right{
+                    right: 12px;
+                    left:auto;
+                    background:#545454;
+                }
+            }
+        }
+    }
+}
+
+.my-modal-catalog{
+    input {
+        font-family: monospace;
+    }
+    .title {
+        line-height: 1.1;
+    }
+    .title, .subTitle{
+        font-family: monospace;
+        font-size: 1.3em !important;
+    }
+    .subTitle{
+        line-height: 0.7;
+        font-size: 0.9em !important;
+    }
+    .subTitle, .subTitle2{
+        font-family: monospace;
+    }
+    .subTitle2{
+        font-size: 0.8em !important;
+        line-height: 1.1;
+        span{
+            font-weight: bolder;
+        }
+    }
+
+    .modal-body{
+        text-align: center;
+        background: whitesmoke;
+    }
+    .card-img, .card-img-top, .card-img-bottom {
+        width: 85%;
+    }
+
+    .badge{
+        width: 100%;
+        font-size: 1em;
+        font-family: monospace;
+        font-weight: 100;
+    }
+}
+
 #ContainerImage{
     background: white;
     .product-image{
