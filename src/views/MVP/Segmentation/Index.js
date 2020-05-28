@@ -94,6 +94,12 @@ class Index extends Component {
         if (aux_base == '' || aux_base == null) {
             aux_base = BASE_SERVER_API_2
         }
+
+        let service_gpu = { key: 'service_gpu', value: aux_base }
+        console.log('--------------------')
+        console.log(service_gpu)
+        this.props.onSetData(service_gpu)
+        console.log('--------------------')
         let data = await axios.post(aux_base + 'segmentation', formData).then(
             response => {
                 console.log('RSPONSE')
@@ -360,7 +366,12 @@ class Index extends Component {
                 <Recommender ref={childRef} 
                     className='mt-0 mb-5 moda' 
                     onHandlerLoading={this.props.onHandlerLoading}
-                    extraData={{ threshold: this.state.threshold / 100, image: this.state.imageFile, genero: this.state.genero, typeFile:this.state.typeFile }}
+                    extraData={{ 
+                        service_gpu: this.props.service_gpu,
+                        threshold: this.state.threshold / 100, 
+                        image: this.state.imageFile, 
+                        genero: this.state.genero, 
+                        typeFile:this.state.typeFile }}
                 ></Recommender>
             </div>
         )
@@ -371,6 +382,8 @@ const mapStateToProps = state => {
     return {
         notify: state.general.notify,
         isLoading: state.general.isLoading,
+        service_gpu: state.general.service_gpu 
+
         // isAuth: state.general.user.auth,
         // database: state.general.database
     }
@@ -380,6 +393,7 @@ const mapDispatchToProps = dispatch => {
     return {
         onFetchData: (url) => dispatch(actions.fetchData(url)),
         onHandlerLoading: (state) => dispatch(actions.handlerLoading(state)),
+        onSetData: (state) => dispatch(actions.setDatabyKeyValue(state)),
         // onInitData: (id) => dispatch(actions.fetchMethod(id)),
         // onAddData: (data) => dispatch(actions.addMethod(data)),
         // onDeleteData: (id) => dispatch(actions.deleteMethod(id)),

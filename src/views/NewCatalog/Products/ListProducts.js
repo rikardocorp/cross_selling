@@ -40,7 +40,7 @@ class ListProducts extends Component {
         let dataset = []
         // let version = this.props.location.pathname
         await this.props.skusdemo.map(async sku => {
-            let data = await this.props.onDispatch('GET', '/sku/' + sku)
+            let data = await this.props.onDispatch('GET', '/ver1/sku/' + sku)
             if (data.status && data.content != null) {
                 dataset.push(data.content)
             }

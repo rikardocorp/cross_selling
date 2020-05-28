@@ -17,6 +17,12 @@ export const handlerLoading = (value) => {
     return { type: at.HANDLER_LOADING, value: value }
 }
 
+export const setDatabyKeyValue = (value) => {
+    console.log('SET DATA')
+    console.log(value)
+    return { type: at.SET_DATA_BY_KEY_VALUE, value: value }
+}
+
 export const setIsLoading = (value) => {
     return { type: at.IS_LOADING, value }
 }

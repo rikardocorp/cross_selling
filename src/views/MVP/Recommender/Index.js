@@ -4,7 +4,9 @@ import axios from 'axios'
 import {BASE_SERVER_API_2} from '../../../shared/axios'
 import { categories } from '../../../shared/formsData'
 import ListRetrieval from '../../NewCatalog/Product/ListRetrieval'
-export class Index extends Component {
+
+// const exampleRef = React.createRef()
+class Index extends Component {
 
     state = {
         categories: categories,
@@ -38,7 +40,16 @@ export class Index extends Component {
         // this.props.onHandlerLoading(true)
         this.set_loading(true)
         console.log('INIT')
-        let data = await axios.post(BASE_SERVER_API_2 + 'recommender', formData).then(
+        // console.log(this.props.service_gpu)
+        console.log('------------------')
+        console.log(this.props)
+        console.log('------------------')
+
+        let aux_base = this.props.extraData.service_gpu || null
+        if (aux_base == '' || aux_base == null) {
+            aux_base = BASE_SERVER_API_2
+        }
+        let data = await axios.post(aux_base + 'recommender', formData).then(
             response => {
                 console.log('PROCESS')
                 this.set_loading(false)
@@ -131,3 +142,5 @@ export class Index extends Component {
 }
 
 export default Index
+// export default connect(mapStateToProps, null)(Index);
+

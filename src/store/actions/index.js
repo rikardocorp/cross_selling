@@ -8,5 +8,6 @@ export {
     fetchData,
     setDatabase,
     setSampleDatabase,
-    handlerLoading
+    handlerLoading,
+    setDatabyKeyValue
 } from './general'

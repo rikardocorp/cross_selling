@@ -68,6 +68,14 @@ const reducer = ( state = initialState, action ) => {
                 ...state,
                 datasample: action.value
             }
+        case at.SET_DATA_BY_KEY_VALUE:
+            let keyValue = action.value
+            let _data = {...state}
+            console.log('STORAGE')
+            console.log(_data)
+            console.log(keyValue)
+            _data[keyValue.key] = keyValue.value
+            return _data
         default: return state
     }
 }
