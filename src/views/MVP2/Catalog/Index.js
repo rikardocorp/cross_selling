@@ -13,10 +13,7 @@ class Index extends Component {
 
     state = {
         modal:false,
-        item: {
-            productName: 'rikardo',
-            imageUrl: 'rikardocorp'
-        },
+        item: {},
         batch: 40,
         numPagination: 0,
         indexPagination: 0,
@@ -141,28 +138,31 @@ class Index extends Component {
             sku: this.state.item.sku,
             label: tag
         }
+        let { indexPagination = 0, batch = 0 } = this.state
+        let index = batch * indexPagination + this.state.item.index
         axios.post('https://todo-6drzojst7q-uc.a.run.app/tagging', params).then(
             response => {
                 console.log('RSPONSE POST TAG')
                 console.log(response)
                 this.props.onHandlerLoading(false)
-                this.setMessage(
-                    <Badge href="#" color="info" > Informacinn Registrada</Badge>
-                )
+
+                if (200 <= response.status < 300 && response.data.success) {
+                    this.setMessage(<Badge href="#" color="info" > Informacinn Registrada</Badge>)
+                    this.props.updateDatabase({ index, data: tag })
+                } else {
+                    this.setMessage(<Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>)
+                }
+                
             }
         ).catch( e => {
             console.log('ERROR:', e)
             this.props.onHandlerLoading(false)
-            this.setMessage(
-                <Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>
-            )
+            this.setMessage(<Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>)
 
         })
     }
 
     render() {
-        console.log('rikardocorp:')
-        console.log(this.props)
         let { numPagination = 0, indexPagination = 0, batch=0}  = this.state
         let indexInit = batch * indexPagination
         let indexFrom = indexInit + batch
@@ -170,14 +170,15 @@ class Index extends Component {
         let products = this.props.database ? this.props.database.slice(indexInit, indexFrom) : []
         let list_products = []
         products.map((item, key) => {
-            let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null } = item
+            let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null, label='team_label' } = item
             let title = productName
-            const filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
+            let filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
+            let withTag = label != 'team_label' ? <Badge style={{ fontFamily: 'monospace',fontSize: '1em', fontWeight: 'lighter'}} color='danger'>Tag</Badge> : null
             list_products.push(
                 <Card key={key} className='hvr-float-shadow product'>
-                    <CardImg top width="100%" src={imageUrl} alt="Card image cap" />
+                    <CardImg onClick={() => this.chooseItem(key, item)} top width="100%" src={imageUrl} alt="Card image cap" />
                     <CardBody>
-                        <CardTitle>{title}</CardTitle>
+                        <CardTitle>{title} {withTag}</CardTitle>
                         <div className='options'>
                             <span onClick={() => this.chooseItem(key, item)} className='hvr-pulse right-0 do-btn-view'><i className="fa fa-tag" aria-hidden="true"></i></span>
                             <span onClick={() => this.goToDetail(item)}  className='hvr-pulse right-0 do-btn-view right'><i className="fa fa-eye" aria-hidden="true"></i></span>
@@ -232,7 +233,7 @@ class Index extends Component {
                     </CardColumns>
 
                     <div className='footer-pagination'>
-                        <MyPagination change={this.updatePagination} total={this.state.numPagination} choose={this.state.indexPagination}></MyPagination>
+                        <MyPagination change={this.updatePagination} total={numPagination} choose={this.state.indexPagination}></MyPagination>
                     </div>
                 </div>
                 <Modal isOpen={this.state.modal} toggle={this.toggle} wrapClassName={'my-modal-catalog'} >
@@ -291,6 +292,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        updateDatabase: (data) => dispatch(actions.updateDatabase(data)),
         onFetchData: (url) => dispatch(actions.fetchData(url)),
         onHandlerLoading: (state) => dispatch(actions.handlerLoading(state)),
         setDatabase: (data) => dispatch(actions.setDatabase(data)),

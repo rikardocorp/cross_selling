@@ -6,7 +6,7 @@ const MyPagination = (props) => {
     let {total=0, choose=0} = props
 
     let items = []
-    let local_total = 4
+    let local_total = 6
     let index_to = 0
     if (choose < local_total){
         index_to = 0

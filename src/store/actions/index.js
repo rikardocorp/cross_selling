@@ -7,6 +7,7 @@ export {
     dispatchHTTP,
     fetchData,
     setDatabase,
+    updateDatabase,
     setSampleDatabase,
     handlerLoading,
     setDatabyKeyValue

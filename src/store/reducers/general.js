@@ -71,6 +71,22 @@ const reducer = ( state = initialState, action ) => {
                     database2: action.value.data
                 }
             }
+        
+        case at.UPDATE_DATABASE:
+            // 1. Make a shallow copy of the items
+            let index = action.value.index
+            let items = [...state.database2];
+            // 2. Make a shallow copy of the item you want to mutate
+            let item = { ...items[index] };
+            // 3. Replace the property you're intested in
+            item.label = action.value.data;
+            // 4. Put it back into our array. N.B. we *are* mutating the array here, but that's why we made a copy first
+            items[index] = item;
+            // 5. Set the state to our new copy
+            return {
+                ...state,
+                database2: items
+            }
             
         case at.SET_SAMPLE_DATABASE:
             return {
