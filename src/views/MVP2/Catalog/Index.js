@@ -57,7 +57,7 @@ class Index extends Component {
         console.log('componentDidMount')
         localStorage.setItem('mvp_moda', '/');
         if (this.props.database == null) {
-            this.updateData()
+            this.updateData('MUJER')
         } else {
             this.setPagination(this.props.database.length, this.state.batch)
         }
@@ -81,13 +81,21 @@ class Index extends Component {
         return array.slice(0, num);
     }
 
-    updateData = async () => {
+    updateData = async (type=null) => {
         // let query = this.props.database.filter((item) => item.sku == sku)
         // query = query.length > 0 ? query[0] : {}
+        let url = null
+        if (type==null){
+            url = 'https://todo-6drzojst7q-uc.a.run.app/skus'
+        } else {
+            url = 'https://todo-6drzojst7q-uc.a.run.app/skus_filtrado?Nombre_Division=' + type
+
+        }
+
         console.log('UPDATE DATABASE')
         this.props.onHandlerLoading(true)
         let total = 0
-        let data = await axios.get('https://todo-6drzojst7q-uc.a.run.app/skus').then(
+        let data = await axios.get(url).then(
             response => {
                 console.log('RSPONSE')
                 console.log(response)
@@ -224,6 +232,11 @@ class Index extends Component {
                             ></i>
                         </div>
 
+                    </div>
+
+                    <div className='division-options text-center py-2'>
+                        <Button onClick={() => this.updateData('MUJER')} color="danger">DAMAS</Button>{' '}
+                        <Button onClick={() => this.updateData('HOMBRE')} color="secondary">CABALLEROS</Button>{' '}
                     </div>
                     
                     <CardColumns>
