@@ -138,7 +138,7 @@ class Index extends Component {
         const tag = data.get('tag')
         this.props.onHandlerLoading(true)
         let params = {
-            sku: '1466227',//this.state.item.sku,
+            sku: this.state.item.sku,
             label: tag
         }
         axios.post('https://todo-6drzojst7q-uc.a.run.app/tagging', params).then(
