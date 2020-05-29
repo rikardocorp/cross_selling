@@ -141,7 +141,7 @@ class Index extends Component {
             sku: '1466227',//this.state.item.sku,
             label: tag
         }
-        axios.post('http://todo-6drzojst7q-uc.a.run.app/tagging', params).then(
+        axios.post('https://todo-6drzojst7q-uc.a.run.app/tagging', params).then(
             response => {
                 console.log('RSPONSE POST TAG')
                 console.log(response)
