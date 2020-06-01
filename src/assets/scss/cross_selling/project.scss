@@ -505,6 +505,10 @@ body{
 }
 
 .my-modal-catalog{
+    .multiSelect{
+        font-family: monospace;
+        width: 86%;
+    }
     input {
         font-family: monospace;
     }

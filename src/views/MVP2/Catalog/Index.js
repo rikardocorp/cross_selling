@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import * as actions from '../../../store/actions/index'
 import { PATH_IMAGE } from '../../../shared/utility'
 import MyPagination from '../../../components/MyPagination'
+import Select from 'react-select'
 import axios from 'axios';
 
 class Index extends Component {
@@ -17,7 +18,14 @@ class Index extends Component {
         batch: 40,
         numPagination: 0,
         indexPagination: 0,
-        message: null
+        message: null,
+        options:[
+            { value: 'Casual', label: 'Casual' },
+            { value: 'Urbano', label: 'Urbano' },
+            { value: 'Elegante', label: 'Elegante' },
+            { value: 'Sport', label: 'Sport' }
+        ],
+        valueSelect: null
     }
 
     setPagination = (total, batch) => {
@@ -28,7 +36,6 @@ class Index extends Component {
     }
 
     updatePagination = (index) => {
-        console.log('updatePagination', index)
         this.setState({
             indexPagination: index
         })
@@ -37,17 +44,25 @@ class Index extends Component {
     toggle = () => {
         this.setState(prevState => ({
             modal: !prevState.modal,
-            message: null
+            message: null,
         }));
     }
 
     chooseItem = (index, item) =>{
-        console.log('CHOOSE ITEM', item)
+        let labels = null
+        if (item.label && item.label != '' && item.label != 'team_label') {
+            labels = item.label.split(',')
+            labels = labels.map( v => {
+                return { value:v, label:v}
+            })
+        }
+
         this.setState(prevState => ({
             item: {
                 index: index,
                 ...item
             },
+            valueSelect: labels,
             modal: !prevState.modal,
             message: null
         }));
@@ -92,13 +107,10 @@ class Index extends Component {
 
         }
 
-        console.log('UPDATE DATABASE')
         this.props.onHandlerLoading(true)
         let total = 0
         let data = await axios.get(url).then(
             response => {
-                console.log('RSPONSE')
-                console.log(response)
                 this.props.onHandlerLoading(false)
                 let aux_response = []
                 if (200 <= response.status < 300) {
@@ -114,15 +126,12 @@ class Index extends Component {
 
     goToDetail = (item) => {
         // let version = this.props.location.pathname
-        console.log('rikardocorp:', this.props)
         let pathname = this.props.params.basepath
         let path = pathname + '/sku/' + item.sku;
-        console.log(path)
         this.props.history.push(path);
     }
 
     reloadData = () => {
-        console.log('reloadData')
         if (this.props.database && this.props.database.length > 0) {
             this.props.setSampleDatabase(this.shuffle(this.props.database, 50))
         }
@@ -135,39 +144,43 @@ class Index extends Component {
         })
     }
 
-    submitTag = e => {
-        console.log('submitTag:')
-        e.preventDefault();
-        console.log(e)
-        const data = new FormData(e.target);
-        const tag = data.get('tag')
-        this.props.onHandlerLoading(true)
-        let params = {
-            sku: this.state.item.sku,
-            label: tag
-        }
-        let { indexPagination = 0, batch = 0 } = this.state
-        let index = batch * indexPagination + this.state.item.index
-        axios.post('https://todo-6drzojst7q-uc.a.run.app/tagging', params).then(
-            response => {
-                console.log('RSPONSE POST TAG')
-                console.log(response)
-                this.props.onHandlerLoading(false)
-
-                if (200 <= response.status < 300 && response.data.success) {
-                    this.setMessage(<Badge href="#" color="info" > Informacinn Registrada</Badge>)
-                    this.props.updateDatabase({ index, data: tag })
-                } else {
-                    this.setMessage(<Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>)
-                }
-                
-            }
-        ).catch( e => {
-            console.log('ERROR:', e)
-            this.props.onHandlerLoading(false)
-            this.setMessage(<Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>)
-
+    changeSelect = (val) =>{
+        this.setState({
+            valueSelect: val
         })
+    }
+
+    submitTag = e => {
+        e.preventDefault();
+        this.props.onHandlerLoading(true)
+        let multiselect = this.state.valueSelect
+        if (multiselect) {
+            let values = multiselect.map(v => { return v.value})
+            values = values.join(',')
+            let params = {
+                sku: this.state.item.sku,
+                label: values
+            }
+            let { indexPagination = 0, batch = 0 } = this.state
+            let index = batch * indexPagination + this.state.item.index
+            axios.post('https://todo-6drzojst7q-uc.a.run.app/tagging', params).then(
+                response => {
+                    this.props.onHandlerLoading(false)
+
+                    if (200 <= response.status < 300 && response.data.success) {
+                        this.setMessage(<Badge href="#" color="info" > Informacinn Registrada</Badge>)
+                        this.props.updateDatabase({ index, data: values })
+                    } else {
+                        this.setMessage(<Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>)
+                    }
+                    
+                }
+            ).catch( e => {
+                this.props.onHandlerLoading(false)
+                this.setMessage(<Badge href="#" color="danger" >Ocurrio un error, vuelve a intentar.</Badge>)
+
+            })
+        }
     }
 
     render() {
@@ -181,7 +194,7 @@ class Index extends Component {
             let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null, label='team_label' } = item
             let title = productName
             let filename = PATH_IMAGE + productId + '_' + sku + '_' + imageId + '.jpg'
-            let withTag = label != 'team_label' ? <Badge style={{ fontFamily: 'monospace',fontSize: '1em', fontWeight: 'lighter'}} color='danger'>Tag</Badge> : null
+            let withTag = (label!='' && label != 'team_label') ? <Badge style={{ fontFamily: 'monospace',fontSize: '1em', fontWeight: 'lighter'}} color='danger'>Tag</Badge> : null
             list_products.push(
                 <Card key={key} className='hvr-float-shadow product'>
                     <CardImg onClick={() => this.chooseItem(key, item)} top width="100%" src={imageUrl} alt="Card image cap" />
@@ -271,10 +284,16 @@ class Index extends Component {
                         <Form className='w-100' inline onSubmit={this.submitTag}>
                             <FormGroup className='w-100'>
                                 <InputGroup style={{ width: '100%' }}>
-                                    <Input style={{ fontSize: '1em' }} name='tag' placeholder={this.state.item.label} />
+                                    <Select 
+                                        isMulti 
+                                        className={'multiSelect'}
+                                        onChange={(e) => this.changeSelect(e)} value={this.state.valueSelect} 
+                                        options={this.state.options} 
+                                        name='tag' />
+                                    {/* <Input style={{ fontSize: '1em' }} name='tag' placeholder={this.state.item.label} /> */}
                                     <InputGroupAddon addonType="prepend">
                                         <Button
-                                            type='submit' className='p-0 px-2'
+                                            type='submit' className='p-0 px-3'
                                             style={{ fontSize: '0.8em', background: '#007bff' }}>
                                             <i className={'fa fa-tag'}></i>
                                         </Button>
