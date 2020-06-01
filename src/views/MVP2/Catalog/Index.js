@@ -276,19 +276,21 @@ class Index extends Component {
                         <p className='py-0 my-0 subTitle2'>
                             <span>Nombre Temporada:</span> {this.state.item.Nombre_Temporada}
                         </p>
+
                     </ModalHeader>
                     <ModalBody className='py-0'>
-                        <CardImg top width="100%" src={this.state.item.imageUrl} alt="Card image cap" />
-                    </ModalBody>
-                    <ModalFooter>
-                        <Form className='w-100' inline onSubmit={this.submitTag}>
-                            <FormGroup className='w-100'>
-                                <InputGroup style={{ width: '100%' }}>
-                                    <Select 
-                                        isMulti 
+                        {
+                            conteLoading
+                        }
+                        <div className='py-3'>
+                            <Form onSubmit={this.submitTag}>
+                                <InputGroup>
+                                    <Select
+                                        isMulti
                                         className={'multiSelect'}
-                                        onChange={(e) => this.changeSelect(e)} value={this.state.valueSelect} 
-                                        options={this.state.options} 
+                                        closeMenuOnSelect={false}
+                                        onChange={(e) => this.changeSelect(e)} value={this.state.valueSelect}
+                                        options={this.state.options}
                                         name='tag' />
                                     {/* <Input style={{ fontSize: '1em' }} name='tag' placeholder={this.state.item.label} /> */}
                                     <InputGroupAddon addonType="prepend">
@@ -299,8 +301,11 @@ class Index extends Component {
                                         </Button>
                                     </InputGroupAddon>
                                 </InputGroup>
-                            </FormGroup>
-                        </Form>
+                            </Form>
+                        </div>
+                        <CardImg top width="100%" src={this.state.item.imageUrl} alt="Card image cap" />
+                    </ModalBody>
+                    <ModalFooter>
                         {this.state.message}
                     </ModalFooter>
                 </Modal>
