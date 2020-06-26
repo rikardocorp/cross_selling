@@ -36,6 +36,8 @@ class Index extends Component {
     }
 
     updatePagination = (index) => {
+        // console.log('updatePagination')
+        // console.log(index)
         this.setState({
             indexPagination: index
         })
@@ -69,7 +71,7 @@ class Index extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount')
+        // console.log('componentDidMount')
         localStorage.setItem('mvp_moda', '/');
         if (this.props.database == null) {
             this.updateData('MUJER')
@@ -119,7 +121,7 @@ class Index extends Component {
             }
         )
         this.props.setDatabase({data: data.data, type:'MVP'})
-        this.setPagination(data.data, this.state.batch)
+        this.setPagination(data.data.length, this.state.batch)
 
     }
 
@@ -188,8 +190,8 @@ class Index extends Component {
         let indexFrom = indexInit + batch
 
         let products = this.props.database ? this.props.database.slice(indexInit, indexFrom) : []
-        console.log('RENDER::')
-        console.log(products)
+        // console.log('RENDER::')
+        // console.log(products)
         let list_products = []
         products.map((item, key) => {
             let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null, label='team_label' } = item
