@@ -103,7 +103,7 @@ class Index extends Component {
         if (type==null){
             url = 'https://todo-6drzojst7q-uc.a.run.app/skus'
         } else {
-            url = 'https://todo-6drzojst7q-uc.a.run.app/skus_filtrado?Nombre_Division=' + type
+            url = 'https://todo-6drzojst7q-uc.a.run.app/skus_by_gender?gender=' + type + '&limit=100&offset=0'
 
         }
 
@@ -119,8 +119,8 @@ class Index extends Component {
                 return aux_response
             }
         )
-        this.props.setDatabase({data: data, type:'MVP'})
-        this.setPagination(data.length, this.state.batch)
+        this.props.setDatabase({data: data.data, type:'MVP'})
+        this.setPagination(data.data, this.state.batch)
 
     }
 
@@ -189,6 +189,8 @@ class Index extends Component {
         let indexFrom = indexInit + batch
 
         let products = this.props.database ? this.props.database.slice(indexInit, indexFrom) : []
+        console.log('RENDER::')
+        console.log(products)
         let list_products = []
         products.map((item, key) => {
             let { image = null, productName = null, sku = null, productId = null, imageId = null, link = null, imageUrl = null, label='team_label' } = item
