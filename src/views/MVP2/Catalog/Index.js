@@ -103,8 +103,7 @@ class Index extends Component {
         if (type==null){
             url = 'https://todo-6drzojst7q-uc.a.run.app/skus'
         } else {
-            url = 'https://todo-6drzojst7q-uc.a.run.app/skus_by_gender?gender=' + type + '&limit=100&offset=0'
-
+            url = 'https://todo-6drzojst7q-uc.a.run.app/skus_by_gender?gender=' + type + '&limit=100&offset=0' 
         }
 
         this.props.onHandlerLoading(true)
